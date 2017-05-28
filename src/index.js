@@ -5,7 +5,7 @@ import PostList from './PostList'
 import Post from './Post'
 import './index.css'
 
-import {fetchPosts, fetchSinglePost} from './api'
+import {fetchPosts, fetchSinglePost, fetchCommentsForPost} from './api'
 
 const postsState = {
   name: 'posts',
@@ -24,7 +24,11 @@ const singlePostState = {
   resolve: [{
     token: 'post',
     deps: ['$transition$'],
-    resolveFn: (transition) => fetchSinglePost(transition.params().postId)
+    resolveFn: transition => fetchSinglePost(transition.params().postId)
+  }, {
+    token: 'comments',
+    deps: ['$transition$'],
+    resolveFn: transition => fetchCommentsForPost(transition.params().postId)
   }]
 }
 

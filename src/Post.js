@@ -2,9 +2,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {UISref} from 'ui-router-react'
 
+import Commment from './Comment'
+
 class Post extends Component {
   render() {
     const {body, id, title, userId} = this.props.resolves.post
+    const {comments} = this.props.resolves
 
     return (
       <article>
@@ -17,6 +20,10 @@ class Post extends Component {
           <UISref to="posts">
             <a>Go back</a>
           </UISref>
+          <div>
+            Comments: <br />
+            {comments.map(comment => <Commment comment={comment} key={comment.id} />)}
+          </div>
         </footer>
       </article>
     )
@@ -25,6 +32,7 @@ class Post extends Component {
 
 Post.propTypes = {
   resolves: PropTypes.shape({
+    comments: PropTypes.array.isRequired,
     post: PropTypes.object.isRequired
   }).isRequired
 }

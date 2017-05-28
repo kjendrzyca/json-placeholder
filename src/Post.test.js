@@ -9,7 +9,10 @@ it('renders without crashing', () => {
   const div = document.createElement('div')
   ReactDOM.render(<UIRouter plugins={[pushStateLocationPlugin]}>
     <Post
-      resolves={{post: {}}}
+      resolves={{
+        comments: [],
+        post: {}
+      }}
     />
   </UIRouter>, div)
 })
