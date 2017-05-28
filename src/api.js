@@ -8,3 +8,4 @@ const options = {
 }
 
 export const fetchPosts = () => fetch(Endpoints.POSTS, options).then(response => response.json())
+export const fetchSinglePost = id => fetch(`${Endpoints.POSTS}/${id}`, options).then(response => response.json())

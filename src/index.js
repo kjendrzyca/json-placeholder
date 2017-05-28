@@ -2,11 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {UIRouter, UIView, UISref, UISrefActive, pushStateLocationPlugin} from 'ui-router-react'
 import PostList from './PostList'
+import Post from './Post'
 import './index.css'
 
-import {fetchPosts} from './api'
+import {fetchPosts, fetchSinglePost} from './api'
 
-var postsState = {
+const postsState = {
   name: 'posts',
   url: '/posts',
   component: PostList,
@@ -16,23 +17,25 @@ var postsState = {
   }]
 }
 
-var aboutState = {
-  name: 'about',
-  url: '/about',
-  component: () => <h3>Its the UI-Router hello world app!</h3>
+const singlePostState = {
+  name: 'post',
+  url: '/posts/:postId',
+  component: Post,
+  resolve: [{
+    token: 'post',
+    deps: ['$transition$'],
+    resolveFn: (transition) => fetchSinglePost(transition.params().postId)
+  }]
 }
 
 ReactDOM.render(
-  <UIRouter plugins={[pushStateLocationPlugin]} states={[postsState, aboutState]}>
+  <UIRouter plugins={[pushStateLocationPlugin]} states={[postsState, singlePostState]}>
     <div>
       <UISrefActive class="active">
         <UISref to="posts"><a>PostList</a></UISref>
       </UISrefActive>
-      <UISrefActive class="active">
-        <UISref to="about"><a>About</a></UISref>
-      </UISrefActive>
 
-      <UIView/>
+      <UIView />
     </div>
   </UIRouter>,
   document.getElementById('root')
