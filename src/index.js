@@ -1,13 +1,19 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {UIRouter, UIView, UISref, UISrefActive, pushStateLocationPlugin} from 'ui-router-react'
-import App from './App'
+import PostList from './PostList'
 import './index.css'
 
-var helloState = {
-  name: 'hello',
-  url: '/hello',
-  component: () => <App />
+import {fetchPosts} from './api'
+
+var postsState = {
+  name: 'posts',
+  url: '/posts',
+  component: PostList,
+  resolve: [{
+    token: 'posts',
+    resolveFn: () => fetchPosts()
+  }]
 }
 
 var aboutState = {
@@ -17,10 +23,10 @@ var aboutState = {
 }
 
 ReactDOM.render(
-  <UIRouter plugins={[pushStateLocationPlugin]} states={[helloState, aboutState]}>
+  <UIRouter plugins={[pushStateLocationPlugin]} states={[postsState, aboutState]}>
     <div>
       <UISrefActive class="active">
-        <UISref to="hello"><a>App</a></UISref>
+        <UISref to="posts"><a>PostList</a></UISref>
       </UISrefActive>
       <UISrefActive class="active">
         <UISref to="about"><a>About</a></UISref>
