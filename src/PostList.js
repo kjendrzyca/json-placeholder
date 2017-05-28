@@ -3,7 +3,23 @@ import PropTypes from 'prop-types'
 import ReactTable from 'react-table'
 import 'react-table/react-table.css'
 
+import './testUtils/localStorageMock'
+
 class PostList extends Component {
+  state = {
+    pageSize: 20
+  }
+  componentDidMount () {
+    const pageSize = localStorage.getItem('pageSize')
+    if (!pageSize) {
+      return
+    }
+    this.setState({pageSize})
+  }
+  setPageSize = (pageSize, pageIndex) => {
+    this.setState({pageSize}, () => localStorage.setItem('pageSize', pageSize))
+  }
+
   render() {
     const {posts} = this.props.resolves
 
@@ -22,8 +38,11 @@ class PostList extends Component {
     }]
 
     return <ReactTable
-      data={posts}
       columns={columns}
+      data={posts}
+      defaultPageSize={10}
+      onPageSizeChange={this.setPageSize}
+      pageSize={this.state.pageSize}
     />
   }
 }
