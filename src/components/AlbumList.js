@@ -18,14 +18,13 @@ class AlbumList extends Component {
     }, {
       Header: 'Title',
       accessor: 'title',
+    }, {
+      Header: 'Actions',
+      accessor: 'id',
+      Cell: props => <UISref to="photos" params={{albumId: props.value}}>
+        <a>Browse photos</a>
+      </UISref>
     }]
-    // , {
-    //   Header: 'Actions',
-    //   accessor: 'id',
-    //   Cell: props => <UISref to="album" params={{albumId: props.value}}>
-    //     <a>Open</a>
-    //   </UISref>
-    // }]
 
     return (
       <Table

@@ -9,7 +9,8 @@ import './index.css'
 import PostList from './components/PostList'
 import Post from './components/Post'
 import AlbumList from './components/AlbumList'
-import {fetchPosts, fetchSinglePost, fetchCommentsForPost, fetchAlbums} from './api'
+import Photos from './components/Photos'
+import {fetchPosts, fetchSinglePost, fetchCommentsForPost, fetchAlbums, fetchPhotosForAlbum} from './api'
 
 const postsState = {
   name: 'posts',
@@ -46,8 +47,19 @@ const albumsState = {
   }]
 }
 
+const photosState = {
+  name: 'photos',
+  url: '/photos?:albumId',
+  component: Photos,
+  resolve: [{
+    token: 'photos',
+    deps: ['$transition$'],
+    resolveFn: transition => fetchPhotosForAlbum(transition.params().albumId)
+  }]
+}
+
 ReactDOM.render(
-  <UIRouter plugins={[pushStateLocationPlugin]} states={[postsState, singlePostState, albumsState]}>
+  <UIRouter plugins={[pushStateLocationPlugin]} states={[postsState, singlePostState, albumsState, photosState]}>
     <Grid>
       <Row>
         <Col xs={12}>
