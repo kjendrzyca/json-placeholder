@@ -2,7 +2,10 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {UISref} from 'ui-router-react'
 
+import {Col, Grid, Nav, Navbar, NavItem, ListGroup, ListGroupItem, PageHeader, Panel, Row} from 'react-bootstrap'
+
 import Commment from './Comment'
+import './Post.css'
 
 class Post extends Component {
   render() {
@@ -10,20 +13,24 @@ class Post extends Component {
     const {comments} = this.props.resolves
 
     return (
-      <article>
+      <article className="post">
         <header>
-          <h1>{id} {title}</h1>
-          <p>User id: {userId}</p>
+          <h1>{id}. {title}</h1>
+          <span className="user-info">User id: {userId}</span>
         </header>
-        <p>{body}</p>
+        <div className="content">
+          <p>{body}</p>
+        </div>
         <footer>
           <UISref to="posts">
             <a>Go back</a>
           </UISref>
-          <div>
-            Comments: <br />
-            {comments.map(comment => <Commment comment={comment} key={comment.id} />)}
-          </div>
+          <Row className="comments">
+            <Col xs={12} md={10} mdOffset={1}>
+              <div className="comments-heading">Comments</div>
+              {comments.map(comment => <Commment comment={comment} key={comment.id} />)}
+            </Col>
+          </Row>
         </footer>
       </article>
     )

@@ -1,15 +1,17 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import './Comment.css'
+
 class Post extends Component {
   render() {
     const {body, email, name} = this.props.comment
 
     return (
-      <article>
+      <article className="comment">
         <header>
-          <h1>{name}</h1>
-          <p>Email: {email}</p>
+          <h4>{name}</h4>
+          <span className="user-info">Email: {email}</span>
         </header>
         <p>{body}</p>
       </article>

@@ -38,10 +38,10 @@ ReactDOM.render(
   <UIRouter plugins={[pushStateLocationPlugin]} states={[postsState, singlePostState]}>
     <Grid>
       <Row>
-        <Col xs={10}>
+        <Col xs={12}>
           <PageHeader>json-placeholder playground</PageHeader>
         </Col>
-        <Col xs={10}>
+        <Col xs={12}>
           <Navbar>
             <Nav>
               <NavItem href="#">
@@ -53,7 +53,7 @@ ReactDOM.render(
             </Nav>
           </Navbar>
         </Col>
-        <Col xs={10}>
+        <Col xs={12}>
           <UIView />
         </Col>
       </Row>

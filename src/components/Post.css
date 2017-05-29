@@ -1,0 +1,13 @@
+.post .content {
+  margin: 40px 0;
+}
+
+.comments {
+  margin-top: 50px;
+}
+
+.comments-heading {
+  color: rgba(0,0,0,.6);
+  font-size: 14px;
+  font-weight: 600;
+}
