@@ -1,26 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import ReactTable from 'react-table'
 import {UISref} from 'ui-router-react'
-import 'react-table/react-table.css'
+
+import Table from './Table'
 
 class PostList extends Component {
-  state = {
-    pageSize: 20
-  }
-
-  componentDidMount () {
-    const pageSize = localStorage.getItem('pageSize')
-    if (!pageSize) {
-      return
-    }
-    this.setState({pageSize: Number(pageSize)})
-  }
-
-  setPageSize = (pageSize, pageIndex) => {
-    this.setState({pageSize}, () => localStorage.setItem('pageSize', pageSize))
-  }
-
   render() {
     const {posts} = this.props.resolves
 
@@ -44,15 +28,11 @@ class PostList extends Component {
       </UISref>
     }]
 
-    return (
-        <ReactTable
-          columns={columns}
-          data={posts}
-          defaultPageSize={this.state.pageSize}
-          onPageSizeChange={this.setPageSize}
-          pageSize={this.state.pageSize}
-        />
-    )
+    return <Table
+      columns={columns}
+      data={posts}
+      resource='posts'
+    />
   }
 }
 

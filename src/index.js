@@ -2,12 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {UIRouter, UIView, UISref, UISrefActive, pushStateLocationPlugin} from 'ui-router-react'
 import {Col, Grid, Nav, Navbar, NavItem, PageHeader, Row} from 'react-bootstrap'
+import 'react-table/react-table.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import './index.css'
 
 import PostList from './components/PostList'
 import Post from './components/Post'
-import {fetchPosts, fetchSinglePost, fetchCommentsForPost} from './api'
+import AlbumList from './components/AlbumList'
+import {fetchPosts, fetchSinglePost, fetchCommentsForPost, fetchAlbums} from './api'
 
 const postsState = {
   name: 'posts',
@@ -34,8 +36,18 @@ const singlePostState = {
   }]
 }
 
+const albumsState = {
+  name: 'albums',
+  url: '/albums',
+  component: AlbumList,
+  resolve: [{
+    token: 'albums',
+    resolveFn: () => fetchAlbums()
+  }]
+}
+
 ReactDOM.render(
-  <UIRouter plugins={[pushStateLocationPlugin]} states={[postsState, singlePostState]}>
+  <UIRouter plugins={[pushStateLocationPlugin]} states={[postsState, singlePostState, albumsState]}>
     <Grid>
       <Row>
         <Col xs={12}>
@@ -46,10 +58,14 @@ ReactDOM.render(
             <Nav>
               <NavItem href="#">
                 <UISrefActive class="active">
-                  <UISref to="posts"><span>PostList</span></UISref>
+                  <UISref to="posts"><span>Posts</span></UISref>
                 </UISrefActive>
               </NavItem>
-              <NavItem href="#">Link</NavItem>
+              <NavItem href="#">
+                <UISrefActive class="active">
+                  <UISref to="albums"><span>Albums</span></UISref>
+                </UISrefActive>
+              </NavItem>
             </Nav>
           </Navbar>
         </Col>

@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {UISref} from 'ui-router-react'
-
-import {Col, Grid, Nav, Navbar, NavItem, ListGroup, ListGroupItem, PageHeader, Panel, Row} from 'react-bootstrap'
+import {Col, Row} from 'react-bootstrap'
 
 import Commment from './Comment'
 import './Post.css'
