@@ -4,8 +4,6 @@ import ReactTable from 'react-table'
 import {UISref} from 'ui-router-react'
 import 'react-table/react-table.css'
 
-import './testUtils/localStorageMock'
-
 class PostList extends Component {
   state = {
     pageSize: 20
@@ -46,13 +44,15 @@ class PostList extends Component {
       </UISref>
     }]
 
-    return <ReactTable
-      columns={columns}
-      data={posts}
-      defaultPageSize={10}
-      onPageSizeChange={this.setPageSize}
-      pageSize={this.state.pageSize}
-    />
+    return (
+        <ReactTable
+          columns={columns}
+          data={posts}
+          defaultPageSize={10}
+          onPageSizeChange={this.setPageSize}
+          pageSize={this.state.pageSize}
+        />
+    )
   }
 }
 

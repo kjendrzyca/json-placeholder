@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {UIRouter, UIView, UISref, UISrefActive, pushStateLocationPlugin} from 'ui-router-react'
-import PostList from './PostList'
-import Post from './Post'
+import PostList from './components/PostList'
+import Post from './components/Post'
 import './index.css'
 
 import {fetchPosts, fetchSinglePost, fetchCommentsForPost} from './api'
