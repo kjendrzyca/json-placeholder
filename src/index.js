@@ -1,10 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {UIRouter, UIView, UISref, UISrefActive, pushStateLocationPlugin} from 'ui-router-react'
-import PostList from './components/PostList'
-import Post from './components/Post'
+import {Col, Grid, Nav, Navbar, NavItem, PageHeader, Row} from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.css'
 import './index.css'
 
+import PostList from './components/PostList'
+import Post from './components/Post'
 import {fetchPosts, fetchSinglePost, fetchCommentsForPost} from './api'
 
 const postsState = {
@@ -34,13 +36,28 @@ const singlePostState = {
 
 ReactDOM.render(
   <UIRouter plugins={[pushStateLocationPlugin]} states={[postsState, singlePostState]}>
-    <div>
-      <UISrefActive class="active">
-        <UISref to="posts"><a>PostList</a></UISref>
-      </UISrefActive>
-
-      <UIView />
-    </div>
+    <Grid>
+      <Row>
+        <Col xs={10}>
+          <PageHeader>json-placeholder playground</PageHeader>
+        </Col>
+        <Col xs={10}>
+          <Navbar>
+            <Nav>
+              <NavItem href="#">
+                <UISrefActive class="active">
+                  <UISref to="posts"><span>PostList</span></UISref>
+                </UISrefActive>
+              </NavItem>
+              <NavItem href="#">Link</NavItem>
+            </Nav>
+          </Navbar>
+        </Col>
+        <Col xs={10}>
+          <UIView />
+        </Col>
+      </Row>
+    </Grid>
   </UIRouter>,
   document.getElementById('root')
 )

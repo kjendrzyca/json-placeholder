@@ -14,7 +14,7 @@ class PostList extends Component {
     if (!pageSize) {
       return
     }
-    this.setState({pageSize})
+    this.setState({pageSize: Number(pageSize)})
   }
 
   setPageSize = (pageSize, pageIndex) => {
@@ -48,7 +48,7 @@ class PostList extends Component {
         <ReactTable
           columns={columns}
           data={posts}
-          defaultPageSize={10}
+          defaultPageSize={this.state.pageSize}
           onPageSizeChange={this.setPageSize}
           pageSize={this.state.pageSize}
         />
