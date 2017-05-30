@@ -1,4 +1,4 @@
-A simple todo app built using [create-react-app](https://github.com/facebookincubator/create-react-app), [ui-router](https://ui-router.github.io/react/) and [react-bootstrap](https://react-bootstrap.github.io/).
+A simple app displaying random json resources built using [create-react-app](https://github.com/facebookincubator/create-react-app), [ui-router](https://ui-router.github.io/react/) and [react-bootstrap](https://react-bootstrap.github.io/).
 
 ## Available Scripts
 
