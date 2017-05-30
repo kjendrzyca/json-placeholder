@@ -24,7 +24,7 @@ class AlbumList extends Component {
       Header: 'Actions',
       accessor: 'id',
       Cell: props => <UISref to="photos" params={{albumId: props.value}}>
-        <a>Browse photos</a>
+        <a>Browse</a>
       </UISref>,
       maxWidth: 100
     }]
