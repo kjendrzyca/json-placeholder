@@ -10,8 +10,16 @@ import PostList from './components/PostList'
 import Post from './components/Post'
 import AlbumList from './components/AlbumList'
 import Photos from './components/Photos'
+import Users from './components/Users'
 import ErrorComponent from './components/Error'
-import {fetchPosts, fetchSinglePost, fetchCommentsForPost, fetchAlbums, fetchPhotosForAlbum} from './api'
+import {
+  fetchPosts,
+  fetchSinglePost,
+  fetchCommentsForPost,
+  fetchAlbums,
+  fetchPhotosForAlbum,
+  fetchUsers
+} from './api'
 
 const postsState = {
   name: 'posts',
@@ -59,6 +67,17 @@ const photosState = {
   }]
 }
 
+const usersState = {
+  name: 'users',
+  url: '/users',
+  component: Users,
+  resolve: [{
+    token: 'users',
+    deps: ['$transition$'],
+    resolveFn: transition => fetchUsers()
+  }]
+}
+
 const errorState = {
   name: 'error',
   url: '/error?:errorDetails',
@@ -80,7 +99,7 @@ ReactDOM.render(
   <UIRouter
     config={config}
     plugins={[pushStateLocationPlugin]}
-    states={[postsState, singlePostState, albumsState, photosState, errorState]}
+    states={[postsState, singlePostState, albumsState, photosState, usersState, errorState]}
   >
     <Grid>
       <Row>
@@ -98,6 +117,11 @@ ReactDOM.render(
               <NavItem href="#">
                 <UISrefActive class="active">
                   <UISref to="albums"><span>Albums</span></UISref>
+                </UISrefActive>
+              </NavItem>
+              <NavItem href="#">
+                <UISrefActive class="active">
+                  <UISref to="users"><span>Users</span></UISref>
                 </UISrefActive>
               </NavItem>
             </Nav>
