@@ -1,17 +1,30 @@
+const JSON_API = 'http://jsonplaceholder.typicode.com'
+
 const Endpoints = {
-  POSTS: 'http://jsonplaceholder.typicode.com/posts',
-  COMMENTS: 'http://jsonplaceholder.typicode.com/comments',
-  ALBUMS: 'http://jsonplaceholder.typicode.com/albums',
-  PHOTOS: 'http://jsonplaceholder.typicode.com/photos'
+  POSTS: `${JSON_API}/posts`,
+  COMMENTS: `${JSON_API}/comments`,
+  ALBUMS: `${JSON_API}/albums`,
+  PHOTOS: `${JSON_API}/photos`
 }
 
-const options = {
-  method: 'get',
-  accepts: 'application/json'
+const fetchData = url => {
+  return fetch(url, {
+    method: 'get',
+    accepts: 'application/json'
+  }).then(response => {
+    if (!response.ok) {
+      throw response.statusText
+    }
+    return response
+  }).then(response => {
+    return response.json()
+  }).catch(errorMessage => {
+    throw new Error(`${errorMessage} - ${url}`)
+  })
 }
 
-export const fetchPosts = () => fetch(Endpoints.POSTS, options).then(response => response.json())
-export const fetchSinglePost = id => fetch(`${Endpoints.POSTS}/${id}`, options).then(response => response.json())
-export const fetchCommentsForPost = id => fetch(`${Endpoints.COMMENTS}?postId=${id}`, options).then(response => response.json())
-export const fetchAlbums = () => fetch(Endpoints.ALBUMS, options).then(response => response.json())
-export const fetchPhotosForAlbum = id => fetch(`${Endpoints.PHOTOS}?albumId=${id}`, options).then(response => response.json())
+export const fetchPosts = () => fetchData(Endpoints.POSTS)
+export const fetchSinglePost = id => fetchData(`${Endpoints.POSTS}/${id}`)
+export const fetchCommentsForPost = id => fetchData(`${Endpoints.COMMENTS}?postId=${id}`)
+export const fetchAlbums = () => fetchData(Endpoints.ALBUMS)
+export const fetchPhotosForAlbum = id => fetchData(`${Endpoints.PHOTOS}?albumId=${id}`)

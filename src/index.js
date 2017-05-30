@@ -10,6 +10,7 @@ import PostList from './components/PostList'
 import Post from './components/Post'
 import AlbumList from './components/AlbumList'
 import Photos from './components/Photos'
+import ErrorComponent from './components/Error'
 import {fetchPosts, fetchSinglePost, fetchCommentsForPost, fetchAlbums, fetchPhotosForAlbum} from './api'
 
 const postsState = {
@@ -58,8 +59,29 @@ const photosState = {
   }]
 }
 
+const errorState = {
+  name: 'error',
+  url: '/error?:errorDetails',
+  component: ErrorComponent,
+  resolve: [{
+    token: 'errorDetails',
+    deps: ['$transition$'],
+    resolveFn: transition => decodeURIComponent(transition.params().errorDetails)
+  }]
+}
+
+const config = router => {
+  router.stateService.defaultErrorHandler(error => {
+    router.stateService.go('error', {errorDetails: error.detail.message})
+  })
+}
+
 ReactDOM.render(
-  <UIRouter plugins={[pushStateLocationPlugin]} states={[postsState, singlePostState, albumsState, photosState]}>
+  <UIRouter
+    config={config}
+    plugins={[pushStateLocationPlugin]}
+    states={[postsState, singlePostState, albumsState, photosState, errorState]}
+  >
     <Grid>
       <Row>
         <Col xs={12}>
