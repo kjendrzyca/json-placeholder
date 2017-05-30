@@ -11,10 +11,12 @@ class AlbumList extends Component {
 
     const columns = [{
       Header: 'Id',
-      accessor: 'id'
+      accessor: 'id',
+      maxWidth: 100
     }, {
       Header: 'UserId',
-      accessor: 'userId'
+      accessor: 'userId',
+      maxWidth: 100
     }, {
       Header: 'Title',
       accessor: 'title',
@@ -23,7 +25,8 @@ class AlbumList extends Component {
       accessor: 'id',
       Cell: props => <UISref to="photos" params={{albumId: props.value}}>
         <a>Browse photos</a>
-      </UISref>
+      </UISref>,
+      maxWidth: 100
     }]
 
     return (

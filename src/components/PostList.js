@@ -10,10 +10,12 @@ class PostList extends Component {
 
     const columns = [{
       Header: 'Id',
-      accessor: 'id'
+      accessor: 'id',
+      maxWidth: 100
     }, {
       Header: 'UserId',
-      accessor: 'userId'
+      accessor: 'userId',
+      maxWidth: 100
     }, {
       Header: 'Title',
       accessor: 'title',
@@ -25,7 +27,8 @@ class PostList extends Component {
       accessor: 'id',
       Cell: props => <UISref to="post" params={{postId: props.value}}>
         <a>Open</a>
-      </UISref>
+      </UISref>,
+      maxWidth: 100
     }]
 
     return <Table
