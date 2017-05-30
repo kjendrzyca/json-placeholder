@@ -1,4 +1,4 @@
-const JSON_API = 'http://jsonplaceholder.typicode.com'
+const JSON_API = 'https://jsonplaceholder.typicode.com'
 
 const Endpoints = {
   POSTS: `${JSON_API}/posts`,
