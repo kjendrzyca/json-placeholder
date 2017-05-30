@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import './Comment.css'
 
-class Post extends Component {
+class Comment extends Component {
   render() {
     const {body, email, name} = this.props.comment
 
@@ -19,8 +19,8 @@ class Post extends Component {
   }
 }
 
-Post.propTypes = {
+Comment.propTypes = {
   comment: PropTypes.object.isRequired
 }
 
-export default Post
+export default Comment
